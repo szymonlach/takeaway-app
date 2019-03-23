@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/fontello.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/fontello.css}">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
 </head>
 <body>
-    <div id="logo">
-        Welcome in the restaurant
-    </div>
+<div id="logo">
+    Welcome in the restaurant
+</div>
 
-    <div id="dishes">
-        <div class="dish">
+<div id="dishes">
+    <ul th:remove="all-but-first">
+        <li th:each="dish: ${dishes}">
             <div class="dish-icon">
                 <i class=" icon-food"></i>
             </div>
             <div class="dish-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia mollis odio eu bibendum. Praesent non
-                hendrerit risus. Nulla id semper sem. Mauris risus mauris, ultrices sed ullamcorper sed, vulputate vel nisi.
-                Aliquam augue ante, mattis in pulvinar vitae, ultrices nec leo. Nulla ultricies augue enim, sit amet semper
-                tellus vulputate sit amet.
+                <div th:text="|${dish.name} ${dish.price}zł|"></div>
+                <div th:text="${dish.shortDescription}"></div>
             </div>
             <div style="clear:both;"></div>
-        </div>
+        </li>
+    </ul>
 
-    </div>
+
+</div>
 
 </body>
 </html>
