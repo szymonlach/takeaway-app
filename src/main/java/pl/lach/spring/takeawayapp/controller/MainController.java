@@ -23,7 +23,7 @@ public class MainController {
     public String start(Model model){
         List<Dish> dishes = dishRepository.findAll();
         model.addAttribute("dishes",dishes);
-        return "MainSite.html";
+        return "MainSite";
     }
 
 }

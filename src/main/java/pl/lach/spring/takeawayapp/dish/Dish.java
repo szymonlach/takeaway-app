@@ -16,6 +16,7 @@ public class Dish {
     private String shortDescription;
     @Column(length = 1024)
     private String description;
+    private String img;
 
     public Long getId() {
         return id;
@@ -57,6 +58,14 @@ public class Dish {
         this.description = description;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,6 +83,7 @@ public class Dish {
 
         return Objects.hash(getId(), getPrice(), getName(), getShortDescription(), getDescription());
     }
+
 
     @Override
     public String toString() {

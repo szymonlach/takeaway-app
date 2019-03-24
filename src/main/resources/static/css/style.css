@@ -1,40 +1,14 @@
 body {
     background-color: #404040;
     font-family: 'Lato', sans-serif;
-    margin: 0;
 }
 
-#logo {
-    height: 400px;
-    width: available;
-    background-image: url("../forkwallpaper.jpg");
-    background-size: 100% 100%;
-    color: white;
-    font-size: 44px;
-    letter-spacing: 3px;
-    font-weight: 700;
-    text-align: center;
+.jumbotron {
+    background-size: cover;
+    background: url('pizza-margherita.jpg') no-repeat;
 }
 
-#dishes {
-    margin-right: auto;
-    margin-left: auto;
-    padding: 40px;
-    width: 730px;
-    background-color: #dedede;
-}
-
-.dish-icon {
-    float: left;
-}
-
-.dish-description {
-}
-
-ul{
-    list-style: none;
-}
-ul li{
-    padding: 10px;
+.media-body {
+    margin-left: 10px;
 }
 

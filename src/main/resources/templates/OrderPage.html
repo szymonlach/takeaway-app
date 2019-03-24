@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Main</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/fontello.css}">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+    <title>OrderPage</title>
 </head>
 <body>
 
@@ -17,26 +19,13 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container text-center text-white jumbo-container">
-                <h1 class="display-4">Foodie</h1>
-                <p>Welcome in the restaurant</p>
-                <a th:href="@{/order}">Your order</a>
+                <h1 class="display-2">Your order</h1>
+                <a th:href="@{/main}">Main page</a>
             </div>
-            </div>
-        </div>
-
-    <div class="media col-6 offset-3 my-1" th:each="dish: ${dishes}">
-        <i class="icon-food"></i>
-        <div class="media-body">
-            <div>
-                <a th:text="|${dish.name} ${dish.price}zł|"
-                   th:href="@{|/dish/${#strings.replace(dish.name,' ','-')}|}"></a>
-            </div>
-            <p th:text="${dish.shortDescription}"></p>
         </div>
     </div>
 
 </div>
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
