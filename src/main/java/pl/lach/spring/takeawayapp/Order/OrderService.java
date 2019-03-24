@@ -26,4 +26,12 @@ public class OrderService {
     public void addDish(Dish dish) {
         this.orderedDishes.add(dish);
     }
+
+    public Double getTotalPrice() {
+        double totalPrice = 0;
+        for (Dish dish : orderedDishes) {
+            totalPrice += dish.getPrice();
+        }
+        return ((int)(totalPrice*100))/100.;
+    }
 }

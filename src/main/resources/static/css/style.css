@@ -5,10 +5,9 @@ body {
 
 .jumbotron {
     background-size: cover;
-    background: url('pizza-margherita.jpg') no-repeat;
+    background: url('../img/forkwallpaper.jpg') no-repeat;
 }
 
 .media-body {
     margin-left: 10px;
 }
-

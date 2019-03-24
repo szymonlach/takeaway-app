@@ -10,24 +10,21 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/fontello.css}">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
-
-    <title>Sub</title>
+    <title>OrderComplete</title>
 </head>
 <body>
-<div class="container">
-    <div class="col-lg-8 offset-lg-2">
-        <img th:src="@{${dish.img}}" class="img-fluid" alt="Pizza margherita" />
-        <div class="shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="text-center" th:text="${dish.name}">Dish name</h1>
-            <h2 class="text-center" th:text="|${dish.price}zł|">Price</h2>
-            <p class="text-justify" th:text="${dish.description}">Description</p>
-
-            <a th:href="@{|/order/add?id=${dish.id}|}">Add</a>
-
+<div class="container-fluid">
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container text-center text-white jumbo-container">
+                <h1 class="display-2">Thank you</h1>
+                <p>Order is complete</p>
+                <a th:href="@{/main}">Main page</a>
+            </div>
         </div>
     </div>
-
 </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

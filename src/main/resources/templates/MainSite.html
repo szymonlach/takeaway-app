@@ -21,33 +21,33 @@
                 <p>Welcome in the restaurant</p>
                 <a th:href="@{/order}">Your order</a>
             </div>
-            </div>
-        </div>
-
-    <div class="media col-6 offset-3 my-1" th:each="dish: ${dishes}">
-        <i class="icon-food"></i>
-        <div class="media-body">
-            <div>
-                <a th:text="|${dish.name} ${dish.price}zł|"
-                   th:href="@{|/dish/${#strings.replace(dish.name,' ','-')}|}"></a>
-            </div>
-            <p th:text="${dish.shortDescription}"></p>
         </div>
     </div>
 
+    <div class="media col-6 offset-3 my-3 bg-light rounded p-2" th:each="dish: ${dishes}">
+        <i class="icon-food"></i>
+        <div class="media-body">
+            <a th:text="|${dish.name} ${dish.price}zł|"
+               th:href="@{|/dish/${#strings.replace(dish.name,' ','-')}|}"></a>
+
+            <p th:text="${dish.shortDescription}"></p>
+            <a th:href="@{|/order/add?id=${dish.id}|}">Add</a>
+        </div>
+
+    </div>
 </div>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 </html>
