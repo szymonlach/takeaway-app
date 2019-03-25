@@ -55,4 +55,4 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-food:before { content: '\f0f5'; font-size: 90px } /* '' */
+.icon-food:before { content: '\f0f5'; font-size:90px } /* '' */

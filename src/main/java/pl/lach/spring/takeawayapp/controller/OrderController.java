@@ -10,6 +10,7 @@ import pl.lach.spring.takeawayapp.Order.OrderRepository;
 import pl.lach.spring.takeawayapp.Order.OrderService;
 import pl.lach.spring.takeawayapp.dish.Dish;
 import pl.lach.spring.takeawayapp.dish.DishRepository;
+import pl.lach.spring.takeawayapp.message.Message;
 
 import java.util.Optional;
 
@@ -49,11 +50,12 @@ public class OrderController {
     }
 
     @PostMapping("/order/complete")
-    public String realizeOrder(@RequestParam String address, @RequestParam String telephone) {
+    public String realizeOrder(@RequestParam String address, @RequestParam String telephone, Model model) {
         orderService.getOrder().setAddres(address);
         orderService.getOrder().setTelephone(telephone);
         orderRepository.save(orderService.getOrder());
         orderService.clear();
+        model.addAttribute("message", new Message("Thank you", "Order hes been accepted"));
         return "MessagePage";
     }
 

@@ -22,7 +22,7 @@
             <h2 class="text-center" th:text="|${dish.price}zł|">Price</h2>
             <p class="text-justify" th:text="${dish.description}">Description</p>
 
-            <a th:href="@{|/order/add?id=${dish.id}|}">Add</a>
+            <a class="btn btn-primary d-block" th:href="@{|/order/add?id=${dish.id}|}">Add</a>
 
         </div>
     </div>

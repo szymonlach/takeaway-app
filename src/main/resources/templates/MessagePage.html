@@ -17,9 +17,9 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container text-center text-white jumbo-container">
-                <h1 class="display-2">Thank you</h1>
-                <p>Order is complete</p>
-                <a th:href="@{/main}">Main page</a>
+                <h1 class="display-2" th:text="${message.title}">Thank you</h1>
+                <p th:text="${message.description}">Order is complete</p>
+                <a class="btn btn-primary d-block" th:href="@{/main}">Main page</a>
             </div>
         </div>
     </div>
