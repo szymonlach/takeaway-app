@@ -6,32 +6,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import pl.lach.spring.takeawayapp.dish.Dish;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 @Scope(scopeName = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class OrderService {
 
-    private List<Dish> orderedDishes;
+    private Order order;
 
     public OrderService() {
-        this.orderedDishes = new ArrayList<>();
+        clear();
     }
 
-    public List<Dish> getOrderedDishes() {
-        return orderedDishes;
+    public Order getOrder() {
+        return order;
     }
 
-    public void addDish(Dish dish) {
-        this.orderedDishes.add(dish);
+    public void addDishToOrder(Dish dish) {
+        order.getDishes().add(dish);
     }
 
-    public Double getTotalPrice() {
-        double totalPrice = 0;
-        for (Dish dish : orderedDishes) {
-            totalPrice += dish.getPrice();
-        }
-        return ((int)(totalPrice*100))/100.;
+    public void clear() {
+        order = new Order();
+        order.setStatus(OrderStatus.NEW);
     }
+
+
 }

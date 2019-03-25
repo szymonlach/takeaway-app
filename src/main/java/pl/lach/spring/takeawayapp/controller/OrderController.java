@@ -3,11 +3,11 @@ package pl.lach.spring.takeawayapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import pl.lach.spring.takeawayapp.Order.Order;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.lach.spring.takeawayapp.Order.OrderRepository;
 import pl.lach.spring.takeawayapp.Order.OrderService;
-import pl.lach.spring.takeawayapp.Order.OrderStatus;
 import pl.lach.spring.takeawayapp.dish.Dish;
 import pl.lach.spring.takeawayapp.dish.DishRepository;
 
@@ -30,9 +30,9 @@ public class OrderController {
 
     @GetMapping("/order")
     public String showOrder(Model model) {
-        model.addAttribute("orders", orderService.getOrderedDishes());
-        model.addAttribute("totalPrice",orderService.getTotalPrice());
-        model.addAttribute("order",new Order());
+        model.addAttribute("order", orderService.getOrder());
+        model.addAttribute("totalPrice", orderService.getOrder().getDishes()
+                .stream().mapToDouble(Dish::getPrice).sum());
         return "OrderPage";
     }
 
@@ -40,20 +40,21 @@ public class OrderController {
     public String addOrder(@RequestParam(name = "id", required = true, defaultValue = "1") Long id, Model model) {
         Optional<Dish> dish = dishRepository.findById(id);
         dish.ifPresent(d -> {
-            orderService.addDish(d);
-            model.addAttribute("dishes", orderService.getOrderedDishes());
-            model.addAttribute("totalPrice",orderService.getTotalPrice());
-            model.addAttribute("order",new Order());
+            orderService.addDishToOrder(d);
+            model.addAttribute("order", orderService.getOrder());
+            model.addAttribute("totalPrice", orderService.getOrder().getDishes()
+                    .stream().mapToDouble(Dish::getPrice).sum());
         });
         return dish.map(d -> "OrderPage").orElse("redirect:/main");
     }
 
     @PostMapping("/order/complete")
-    public String realizeOrder(@ModelAttribute Order order){
-        order.setDishes(orderService.getOrderedDishes());
-        order.setStatus(OrderStatus.COMPLETE);
-        orderRepository.save(order);
-        return "OrderComplete";
+    public String realizeOrder(@RequestParam String address, @RequestParam String telephone) {
+        orderService.getOrder().setAddres(address);
+        orderService.getOrder().setTelephone(telephone);
+        orderRepository.save(orderService.getOrder());
+        orderService.clear();
+        return "MessagePage";
     }
 
 }
