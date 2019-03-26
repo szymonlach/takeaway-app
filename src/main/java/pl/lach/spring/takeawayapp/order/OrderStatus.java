@@ -1,4 +1,4 @@
-package pl.lach.spring.takeawayapp.Order;
+package pl.lach.spring.takeawayapp.order;
 
 public enum OrderStatus {
 

@@ -1,4 +1,4 @@
-package pl.lach.spring.takeawayapp.Order;
+package pl.lach.spring.takeawayapp.order;
 
 import pl.lach.spring.takeawayapp.dish.Dish;
 
@@ -84,7 +84,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "order{" +
                 "id=" + id +
                 ", dishes=" + dishes +
                 ", addres='" + address + '\'' +

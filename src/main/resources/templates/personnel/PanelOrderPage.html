@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Panel Page</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/fontello.css}">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+    <title>PanelOrderPage</title>
 </head>
 <body>
 
@@ -18,38 +18,31 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container text-center text-white jumbo-container">
-                <h1 class="display-4">Orders</h1>
+                <h1 class="display-4" th:text="|Order ${order.id}|">Order</h1>
+                <h3 class="display-6" th:text="|Status ${order.status}|">Order</h3>
+                <a class="btn btn-primary d-block" th:href="@{/panel/orders}">Orders list</a>
             </div>
         </div>
-        <div class="row my-2">
-            <div class="col-3 offset-1">
-                <a class="btn btn-danger d-block" th:href="@{/panel/orders?status=NEW}">New</a>
-            </div>
-            <div class="col-3">
-                <a class="btn btn-warning d-block" th:href="@{/panel/orders?status=IN_PROGRESS}">In progress</a>
-            </div>
-            <div class="col-3">
-                <a class="btn btn-success d-block" th:href="@{/panel/orders?status=COMPLETE}">Complete</a>
-            </div>
-        </div>
+
         <table class="table table-sm table-dark">
             <tr>
                 <th>#</th>
-                <th>Address</th>
-                <th>Telephone</th>
-                <th>Status</th>
-                <th>Edit</th>
+                <th>Name</th>
+                <th>Price</th>
             </tr>
-            <tr th:each="order:${orders}">
-                <td th:text="${order.id}"></td>
-                <td th:text="${order.address}"></td>
-                <td th:text="${order.telephone}"></td>
-                <td th:text="${order.status.toString()}"></td>
-                <td>
-                    <a class="btn btn-success d-block" th:href="@{|/panel/orders/${order.id}|}">Edit</a>
-                </td>
+            <tr th:each="dish:${order.getDishes()}">
+                <td th:text="${dish.id}"></td>
+                <td th:text="${dish.name}"></td>
+                <td th:text="${dish.price}"></td>
             </tr>
         </table>
+        <h2 class="text-right text-white" th:text="|Total price: ${totalPrice}zł|"></h2>
+        <th:block th:switch="${order.status}">
+            <form action="#" th:action="@{|/panel/orders/${order.id}|}" method="post">
+                <button th:case="${T(pl.lach.spring.takeawayapp.order.OrderStatus).NEW}" type="submit" class="btn btn-primary d-block">Order in progress</button>
+                <button th:case="${T(pl.lach.spring.takeawayapp.order.OrderStatus).IN_PROGRESS}" type="submit" class="btn btn-primary d-block">Order complete</button>
+            </form>
+        </th:block>
     </div>
 </div>
 <!-- Optional JavaScript -->

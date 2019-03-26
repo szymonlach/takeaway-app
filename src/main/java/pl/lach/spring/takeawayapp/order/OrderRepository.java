@@ -1,4 +1,4 @@
-package pl.lach.spring.takeawayapp.Order;
+package pl.lach.spring.takeawayapp.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

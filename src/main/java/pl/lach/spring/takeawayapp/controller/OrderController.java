@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.lach.spring.takeawayapp.Order.OrderRepository;
-import pl.lach.spring.takeawayapp.Order.OrderService;
+import pl.lach.spring.takeawayapp.order.OrderRepository;
+import pl.lach.spring.takeawayapp.order.OrderService;
 import pl.lach.spring.takeawayapp.dish.Dish;
 import pl.lach.spring.takeawayapp.dish.DishRepository;
 import pl.lach.spring.takeawayapp.message.Message;
@@ -55,7 +55,7 @@ public class OrderController {
         orderService.getOrder().setTelephone(telephone);
         orderRepository.save(orderService.getOrder());
         orderService.clear();
-        model.addAttribute("message", new Message("Thank you", "Order hes been accepted"));
+        model.addAttribute("message", new Message("Thank you", "order hes been accepted"));
         return "MessagePage";
     }
 

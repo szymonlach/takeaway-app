@@ -3,13 +3,15 @@ package pl.lach.spring.takeawayapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import pl.lach.spring.takeawayapp.Order.Order;
-import pl.lach.spring.takeawayapp.Order.OrderRepository;
-import pl.lach.spring.takeawayapp.Order.OrderStatus;
+import org.springframework.web.bind.annotation.*;
+import pl.lach.spring.takeawayapp.message.Message;
+import pl.lach.spring.takeawayapp.order.Order;
+import pl.lach.spring.takeawayapp.order.OrderRepository;
+import pl.lach.spring.takeawayapp.order.OrderStatus;
+import pl.lach.spring.takeawayapp.dish.Dish;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PersonnelPanelController {
@@ -41,5 +43,30 @@ public class PersonnelPanelController {
         model.addAttribute("orders", orders);
 
         return "personnel/PanelPage";
+    }
+
+    @GetMapping("/panel/orders/{id}")
+    public String showOrderDetails(@PathVariable Long id, Model model) {
+        Optional<Order> order = orderRepository.findById(id);
+        order.ifPresent(o -> {
+            model.addAttribute("order", o);
+            model.addAttribute("totalPrice", o.getDishes().stream().mapToDouble(Dish::getPrice).sum());
+        });
+        return "personnel/PanelOrderPage";
+    }
+
+    @PostMapping("/panel/orders/{id}")
+    public String updateOrder(@PathVariable Long id, Model model) {
+        Optional<Order> order = orderRepository.findById(id);
+        order.ifPresent(o -> {
+            if (o.getStatus().equals(OrderStatus.NEW))
+                o.setStatus(OrderStatus.IN_PROGRESS);
+            else if (o.getStatus().equals(OrderStatus.IN_PROGRESS))
+                o.setStatus(OrderStatus.COMPLETE);
+            orderRepository.save(o);
+            model.addAttribute("message", new Message("Update order", "Actually order is " + o.getStatus().toString()));
+        });
+
+        return "MessagePage";
     }
 }
